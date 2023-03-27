@@ -2,3 +2,4 @@ __pycache__
 env
 model_pths/*
 !model_pths/.gitkeep
+data

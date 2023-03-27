@@ -13,9 +13,10 @@ INPUT_IMAGE_SIZE = (352, 352)
 transform = transforms.Compose(
     [
         transforms.Resize(
-            (INPUT_IMAGE_SIZE, INPUT_IMAGE_SIZE),
+            INPUT_IMAGE_SIZE,
             interpolation=TF.InterpolationMode.BICUBIC,
         ),
+        transforms.ToTensor(),
         transforms.Normalize(
             (0.5, 0.5, 0.5),
             (0.5, 0.5, 0.5),
@@ -34,7 +35,8 @@ class DPTDepthImageProcessor(BaseImageProcessor):
     def preprocess(
         self, inputs: Dict[str, Image], **kwargs  # {'rgb': ... }
     ) -> Dict[str, Tensor]:
-        return dict(rgb=transform(inputs["rgb"]).unsqueeze(0))
+        rgb: Tensor = transform(inputs["rgb"])
+        return dict(rgb=rgb.unsqueeze(0))
 
     def postprocess(
         self, logits: Tensor, size: Tuple[int, int], **kwargs
