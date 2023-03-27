@@ -1,0 +1,7 @@
+torch
+opencv-python
+black
+transformers
+torchvision
+datasets
+matplotlib
