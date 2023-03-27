@@ -4,6 +4,7 @@ from torch import Tensor, nn
 from transformers import PreTrainedModel
 
 from .configuration_dptdepth import DPTDepthConfig
+from .models import DPTDepthModel as DPTDepth
 
 
 class DPTDepthModel(PreTrainedModel):
@@ -17,7 +18,7 @@ class DPTDepthModel(PreTrainedModel):
     def __init__(self, config: DPTDepthConfig):
         super().__init__(config)
         self.model = DPTDepth()
-        self.loss = nn.BCEWithLogitsLoss()
+        self.loss = nn.L1Loss()
 
     """
     You can have your model return anything you want, 
